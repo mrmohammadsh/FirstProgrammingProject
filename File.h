@@ -1,32 +1,7 @@
-//-------------------------------------------Librarys---------------------------------------------
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-
-//--------------------------------------------Define&typedefs------------------------------------
-typedef long long int lint;
-typedef unsigned long long int ulint;
-//------------------------------------------NameSpace--------------------------------------------
-using namespace std;
-//-----------------------------------------GlobalVariables&Classes---------------------------------------
-fstream Cities,Accounts,Customers;    //Class for reading file
-struct City{
-    int X,Y;
-};//CountryCitys[300];
-struct Account{
-    lint ID,Password,Mony;
-};
-struct Customer{
-    string username,Password,Firstname,Lastname,Mobile,Friend,BId,Bpassword;
-};
-vector<struct Customer> CustomerList;
-vector<struct City> CountryCitys;
-vector<struct Account> CountryAccount;
-#include "File.h"
-//CountryCitys.resize(300,0);
+#ifndef FileFunctions
+#define FileFunctions
 //-----------------------------------------Function----------------------------------------------
-/*
+
 void OpenFile(){
     cout<<"Reading Cities....";
     Cities.open("cities.txt",ios::in|ios::app);
@@ -93,14 +68,4 @@ void CloseFiles(){
 
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
-*/
-
-//------------------------------------------Main-------------------------------------------------
-int main(){
-    
-    OpenFile();
-    InsertData();
-    CloseFiles();
-   //cout<<CountryAccount[3].Mony;
-    return 0;
-}
+#endif
