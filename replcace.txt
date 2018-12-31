@@ -1,0 +1,12 @@
+        CustomerTicket.push_back(Trip());
+        CustomerTicket[CustomerTicket.size()-1].Vehicle=tmp;
+        Tickets>>tmp;
+        CustomerTicket[CustomerTicket.size()-1].Origin=tmp;
+        Tickets>>tmp;
+        CustomerTicket[CustomerTicket.size()-1].Destination=tmp;
+        Tickets>>tmp;
+        CustomerTicket[CustomerTicket.size()-1].Date=tmp;
+        Tickets>>tmp;
+        CustomerTicket[CustomerTicket.size()-1].Id=tmp;
+        Tickets>>tmp;
+        CustomerTicket[CustomerTicket.size()-1].Time=tmp;

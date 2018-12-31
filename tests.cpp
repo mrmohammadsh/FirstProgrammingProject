@@ -4,14 +4,16 @@
 
 using namespace std;
 fstream file1;
-
-
+const char* name="hello";
+int jjk=0;
+int *jj=&jjk;
+void hello(string a){
+    cout<<a;
+}
 int main(){
     file1.open("accounts.txt",ios::in);
-    string a;
-    for(int i=0;i<9;i++){
-        file1>>a;
-        cout<<a<<endl;
-    }
+    string a="hello";
+    cout<<&name;
+    hello("kahar");
     return 0;
 }
