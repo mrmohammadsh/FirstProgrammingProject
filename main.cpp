@@ -10,7 +10,7 @@ typedef unsigned long long int ulint;
 //------------------------------------------NameSpace--------------------------------------------
 using namespace std;
 //-----------------------------------------GlobalVariables&Classes---------------------------------------
-fstream Cities,Accounts,Customers;    //Class for reading file
+fstream Cities,Accounts,Customers,Tickets;    //Class for reading file
 struct City{
     int X,Y;
 };//CountryCitys[300];
@@ -20,9 +20,13 @@ struct Account{
 struct Customer{
     string username,Password,Firstname,Lastname,Mobile,Friend,BId,Bpassword;
 };
+struct Ticket{
+    string Vehicle,Origin,Destination,Date,Driver;
+};
 vector<struct Customer> CustomerList;
 vector<struct City> CountryCitys;
 vector<struct Account> CountryAccount;
+//vector <struct 
 #include "File.h"
 //CountryCitys.resize(300,0);
 //-----------------------------------------Function----------------------------------------------
@@ -94,6 +98,9 @@ void CloseFiles(){
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 */
+void ShowTicket(string Viechel,string Origin,string Destination,string date){
+
+}
 
 //------------------------------------------Main-------------------------------------------------
 int main(){
@@ -101,6 +108,11 @@ int main(){
     OpenFile();
     InsertData();
     CloseFiles();
-   //cout<<CountryAccount[3].Mony;
+    for (int i=0;i<9;i++){
+        cout<<CountryCitys[i].X<<endl;
+        cout<<CountryCitys[i].Y<<endl;
+        //cout<<CountryAccount[i].Mony<<endl;
+    }
+    
     return 0;
 }

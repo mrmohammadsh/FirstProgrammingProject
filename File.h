@@ -11,8 +11,12 @@ void OpenFile(){
         if(Accounts.is_open()){
             Customers.open("Customers.txt",ios::in|ios::app);
             if(Customers.is_open()){
-            cout<<"Reading File was Succesful :)";
-            return;
+                Tickets.open("Tickets.txt",ios::in|ios::app);
+                if(Tickets.is_open()){
+                     cout<<"Reading File was Succesful :)";
+                     return;
+                }
+           
             }
             
         }
@@ -23,7 +27,7 @@ void OpenFile(){
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 void InsertData(){
-    int temp,index;
+    lint temp,index;
     string tmp;
     while(Cities>>index){
         CountryCitys.push_back(City());
@@ -35,9 +39,9 @@ void InsertData(){
     while(Accounts>>index){
         CountryAccount.push_back(Account());
         CountryAccount[CountryAccount.size()-1].ID=index;
-        Cities>>temp;
+        Accounts>>temp;
         CountryAccount[CountryAccount.size()-1].Password=temp;
-        Cities>>temp;
+        Accounts>>temp;
         CountryAccount[CountryAccount.size()-1].Mony=temp;
          
     }
@@ -59,6 +63,24 @@ void InsertData(){
         Customers>>tmp;
         CustomerList[CustomerList.size()-1].Friend=tmp;
     }
+    /*while(Customers>>tmp){
+        Ticket.push_back(Customer());
+        CustomerList[CustomerList.size()-1].BId=tmp;
+        Customers>>tmp;
+        CustomerList[CustomerList.size()-1].Bpassword=tmp;
+        Customers>>tmp;
+        CustomerList[CustomerList.size()-1].Firstname=tmp;
+        Customers>>tmp;
+        CustomerList[CustomerList.size()-1].Lastname=tmp;
+        Customers>>tmp;
+        CustomerList[CustomerList.size()-1].username=tmp;
+        Customers>>tmp;
+        CustomerList[CustomerList.size()-1].Password=tmp;
+        Customers>>tmp;
+        CustomerList[CustomerList.size()-1].Mobile=tmp;
+        Customers>>tmp;
+        CustomerList[CustomerList.size()-1].Friend=tmp;
+    }*/
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////
 void CloseFiles(){
