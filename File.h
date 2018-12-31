@@ -2,28 +2,40 @@
 #define FileFunctions
 //-----------------------------------------Function----------------------------------------------
 
-void OpenFile(){
-    cout<<"Reading Cities....";
-    Cities.open("cities.txt",ios::in|ios::app);
-    if(Cities.is_open()){
-        cout<<"Reading Accounts";
-        Accounts.open("accounts.txt",ios::in|ios::app);
-        if(Accounts.is_open()){
-            Customers.open("Customers.txt",ios::in|ios::app);
-            if(Customers.is_open()){
-                Tickets.open("Tickets.txt",ios::in|ios::app);
-                if(Tickets.is_open()){
-                     cout<<"Reading File was Succesful :)";
-                     return;
-                }
-           
+void OpenFile(const char *name){
+    
+        if(strcmp("Cities",name)==0){
+            cout<<"Reading Cities....";
+            Cities.open("cities.txt",ios::in|ios::app);
+            if(Cities.is_open())    cout<<"Rading Cities Was Sucsseful";
+            else exit(0);
             }
-            
+        else if(strcmp("Accounts",name)==0){
+            cout<<"Reading Accounts....";
+            Accounts.open("accounts.txt",ios::in|ios::app);
+            if(Accounts.is_open())    cout<<"Rading Accounts Was Sucsseful";
+            else exit(0);
         }
-        
-    }
-        cout<<"Error :(";
-        exit(0);
+        else if(strcmp("Customers",name)==0){
+            cout<<"Reading Customers....";
+            Customers.open("Customers.txt",ios::in|ios::app);
+            if(Customers.is_open())    cout<<"Rading Customers Was Sucsseful";
+            else exit(0);
+        }
+        else if(strcmp("Tickets",name)==0){
+            cout<<"Reading Tickets....";
+            Tickets.open("Tickets.txt",ios::in|ios::app);
+            if(Tickets.is_open())    cout<<"Rading Tickets Was Sucsseful";
+            else exit(0);
+        }
+        else{
+            OpenFile("Cities");
+            OpenFile("Accounts");
+            OpenFile("Customers");
+            OpenFile("Tickets");
+
+        }
+
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 void InsertData(){
@@ -81,6 +93,11 @@ void InsertData(){
         Customers>>tmp;
         CustomerList[CustomerList.size()-1].Friend=tmp;
     }*/
+}
+void WriteData(string name){
+    if(name=="Tickets"){
+
+    }
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////
 void CloseFiles(){

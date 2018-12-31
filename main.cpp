@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <cstring>
 #include <string>
 
 //--------------------------------------------Define&typedefs------------------------------------
@@ -26,7 +27,6 @@ struct Ticket{
 vector<struct Customer> CustomerList;
 vector<struct City> CountryCitys;
 vector<struct Account> CountryAccount;
-//vector <struct 
 #include "File.h"
 //CountryCitys.resize(300,0);
 //-----------------------------------------Function----------------------------------------------
@@ -102,10 +102,11 @@ void ShowTicket(string Viechel,string Origin,string Destination,string date){
 
 }
 
+
 //------------------------------------------Main-------------------------------------------------
 int main(){
     
-    OpenFile();
+    OpenFile("All");
     InsertData();
     CloseFiles();
     for (int i=0;i<9;i++){
