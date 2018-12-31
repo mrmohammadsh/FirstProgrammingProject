@@ -64,4 +64,22 @@ void DeletTrip(string Origin,string Destination,string Date,string Id,string Veh
         WriteData("Drivers");
         WriteData("Trips");
 }
+void TripCustomer(string Origin,string Destination,string Date,string Vehicle,string Time){
+        for(int i=0;i<CustomerTicket.size();i++){
+                //cout<<"ooooooooooooooooooooooooooo";
+            if(
+            CustomerTicket[i].Origin==Origin&&
+            CustomerTicket[i].Destination==Destination&&
+            CustomerTicket[i].Date==Date&&
+            CustomerTicket[i].Vehicle==Vehicle&&
+            //CustomerTicket[i].Id==Id&&
+            CustomerTicket[i].Time==Time
+            ){ 
+                    cout<<CustomerTicket[i].Id<<'\t';
+                    //cout<<CustomerId(CustomerTicket[i].Id);
+                    cout<<CustomerList[CustomerId(CustomerTicket[i].Id)].Firstname<<'\t';
+                    cout<<CustomerList[CustomerId(CustomerTicket[i].Id)].Lastname<<endl;
+            }
+        }
+}
 #endif

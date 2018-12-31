@@ -48,7 +48,7 @@ void OpenFile(const char *name){
         }
         else if(strcmp("ATickets",name)==0){
             cout<<"Aticket ...."<<endl;
-            ATickets.open("ATicket.txt",ios::in|ios::app);
+            ATickets.open("ATicket.txt",ios::in|ios::out);
             if(ATickets.is_open())    cout<<"Rading Trips Was Sucsseful"<<endl;
             else exit(0);
         }
@@ -91,6 +91,9 @@ void EmptyFile(string name){
     }
     else if(name=="Trips"){
         Trips.open("Trips.txt",ios::out|ios::trunc);
+    }
+    else if(name=="ATickets"){
+        ATickets.open("ATickets.txt",ios::out|ios::trunc);
     }
     CloseFiles();
         
@@ -314,6 +317,7 @@ void WriteData(string name){
         //string Vehicle,Origin,Destination,Date,Driver;
         //Tickets.open("Tickets.txt",ios::out|ios::trunc);
         //EmptyFile("Tickets");
+        EmptyFile("ATickets");
         OpenFile("ATickets");
         //cout<<CustomerATicket.size()<<"oooooo"<<endl;
         for(lint i=0;i<CustomerATicket.size();i++){
