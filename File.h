@@ -7,7 +7,7 @@ typedef unsigned long long int ulint;
 using namespace std;
 //-----------------------------------------GlobalVariables&Classes---------------------------------------
 //-----------------------------------------Function----------------------------------------------
-fstream Cities,Accounts,Customers,Tickets,Drivers,Trips; 
+fstream Cities,Accounts,Customers,Tickets,Drivers,Trips,ATickets; 
 void OpenFile(const char *name){
     
         if(strcmp("Cities",name)==0){
@@ -46,6 +46,12 @@ void OpenFile(const char *name){
             if(Trips.is_open())    cout<<"Rading Trips Was Sucsseful"<<endl;
             else exit(0);
         }
+        else if(strcmp("ATickets",name)==0){
+            cout<<"Aticket ...."<<endl;
+            ATickets.open("ATicket.txt",ios::in|ios::app);
+            if(ATickets.is_open())    cout<<"Rading Trips Was Sucsseful"<<endl;
+            else exit(0);
+        }
         else if("All"){
             OpenFile("Cities");
             OpenFile("Accounts");
@@ -53,6 +59,7 @@ void OpenFile(const char *name){
             OpenFile("Tickets");
             OpenFile("Drivers");
             OpenFile("Trips");
+            OpenFile("ATickets");
 
         }
         
@@ -65,6 +72,8 @@ void CloseFiles(){
     Tickets.close();
     Drivers.close();
     Trips.close();
+    ATickets.close();
+
 
 }
 void EmptyFile(string name){
@@ -81,7 +90,7 @@ void EmptyFile(string name){
         Customers.open("Customers.txt",ios::out|ios::trunc);
     }
     else if(name=="Trips"){
-        Drivers.open("Drivers.txt",ios::out|ios::trunc);
+        Trips.open("Trips.txt",ios::out|ios::trunc);
     }
     CloseFiles();
         
@@ -179,6 +188,24 @@ void InsertData(){
         CustomerTicket[CustomerTicket.size()-1].Time=tmp;
 
     }
+while(ATickets>>tmp){
+        CustomerATicket.push_back(ATicket());
+        CustomerATicket[CustomerATicket.size()-1].Vehicle=tmp;
+        ATickets>>tmp;
+        CustomerATicket[CustomerATicket.size()-1].Origin=tmp;
+        ATickets>>tmp;
+        CustomerATicket[CustomerATicket.size()-1].Destination=tmp;
+        ATickets>>tmp;
+        CustomerATicket[CustomerATicket.size()-1].Date=tmp;
+        ATickets>>tmp;
+        CustomerATicket[CustomerATicket.size()-1].Driver=tmp;
+        ATickets>>tmp;
+        CustomerATicket[CustomerATicket.size()-1].Id=tmp;
+        ATickets>>tmp;
+        CustomerATicket[CustomerATicket.size()-1].Time=tmp;
+
+    }
+
 }
 void WriteData(string name){
     if(name=="Customer"){
@@ -276,6 +303,34 @@ void WriteData(string name){
             Tickets<<'\t';
             Tickets<<CustomerTicket[i].Time;
             Tickets<<'\n';
+            
+        }
+        CloseFiles();
+
+
+    }
+    else if(name=="ATickets"){
+        //OpenFile("Tickets");
+        //string Vehicle,Origin,Destination,Date,Driver;
+        //Tickets.open("Tickets.txt",ios::out|ios::trunc);
+        //EmptyFile("Tickets");
+        OpenFile("ATickets");
+        //cout<<CustomerATicket.size()<<"oooooo"<<endl;
+        for(lint i=0;i<CustomerATicket.size();i++){
+            ATickets<<CustomerATicket[i].Vehicle;
+            ATickets<<'\t';
+            ATickets<<CustomerATicket[i].Origin;
+            ATickets<<'\t';
+            ATickets<<CustomerATicket[i].Destination;
+            ATickets<<'\t';
+            ATickets<<CustomerATicket[i].Date;
+            ATickets<<'\t';
+            ATickets<<CustomerATicket[i].Driver;
+            ATickets<<'\t';
+            ATickets<<CustomerATicket[i].Id;
+            ATickets<<'\t';
+            ATickets<<CustomerATicket[i].Time;
+            ATickets<<'\n';
             
         }
         CloseFiles();

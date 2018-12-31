@@ -54,6 +54,7 @@ void DeletTrip(string Origin,string Destination,string Date,string Id,string Veh
                         CountryAccount[0].Mony-=mony*COST;
                         CountryAccount[AccountId(CustomerTicket[j].Id)].Mony+=(mony*(100-COST)/100.0);
                         CustomerTicket.erase(CustomerTicket.begin()+j);
+                        j--;
 
                 }
         }

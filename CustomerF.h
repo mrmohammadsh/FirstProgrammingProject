@@ -157,5 +157,41 @@
         }
     }
     }
+    void Update(string Time,string Date){
+        for(int i=0;i<TripInf.size();i++){
+            
+            if(
+            
 
+            TripInf[i].Date==Date&&
+            stoi(TripInf[i].Time)<=stoi(Time)
+            ){          //If
+            TripInf.erase(TripInf.begin()+i);
+            i--;
+            }
+        }
+        for(int i=0;i<CustomerTicket.size();i++){
+            if(
+            CustomerTicket[i].Date==Date&&
+            stoi(CustomerTicket[i].Time)<=stoi(Time)
+            ){ 
+                CustomerATicket.push_back(ATicket());
+                CustomerATicket[CustomerATicket.size()-1].Vehicle=CustomerTicket[i].Vehicle;
+                
+                CustomerATicket[CustomerATicket.size()-1].Origin=CustomerTicket[i].Origin;
+                
+                CustomerATicket[CustomerATicket.size()-1].Destination=CustomerTicket[i].Destination;
+                
+                CustomerATicket[CustomerATicket.size()-1].Date=CustomerTicket[i].Date;
+                
+                CustomerATicket[CustomerATicket.size()-1].Driver=CustomerTicket[i].Driver;
+                
+                CustomerATicket[CustomerATicket.size()-1].Id=CustomerTicket[i].Id;
+                
+                CustomerATicket[CustomerATicket.size()-1].Time=CustomerTicket[i].Time;
+                CustomerTicket.erase(CustomerTicket.begin()+i);
+                i--;
+            }
+    }
+    }
 #endif

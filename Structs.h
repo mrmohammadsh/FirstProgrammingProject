@@ -18,6 +18,9 @@ using namespace std;
     struct Ticket{
         string Vehicle,Origin,Destination,Date,Driver,Id,Time;
     };
+    struct ATicket{
+        string Vehicle,Origin,Destination,Date,Driver,Id,Time;
+    };
     struct Driver{
         string username,Password,Firstname,Lastname,Mobile,Vehicle,BId,Bpassword;
     };
@@ -30,6 +33,7 @@ using namespace std;
     vector<struct City> CountryCitys;
     vector<struct Account> CountryAccount;
     vector<struct Ticket> CustomerTicket;
+    vector<struct ATicket> CustomerATicket;
     vector<struct Driver> DriverInf;
      vector<struct Trip> TripInf;
 
