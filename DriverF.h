@@ -1,6 +1,13 @@
 #ifndef DriverFunc
 #define DriverFunc
-
+bool SearchDriverId (string Id){
+        for(lint i=0;i<DriverInf.size();i++){
+                if(DriverInf[i].BId==Id){
+                        return 1;
+                }
+        }
+        return 0;
+}
 void DriverReg(string username,string Password,string Firstname,string Lastname,string Mobile,string BId,string Bpassword,string Vehicle){
         //cout<<endl<<CustomerList.size()<<"kwejrklwj";
         //string username,Password,Firstname,Lastname,Mobile,Friend,BId,Bpassword;
@@ -15,15 +22,19 @@ void DriverReg(string username,string Password,string Firstname,string Lastname,
         DriverInf[DriverInf.size()-1].Bpassword=Bpassword;
         WriteData("Drivers");
     }
-void AddTrip(string Origin,string Destination,string Date,string Id,string Vehicle,string Time){
-        TripInf.push_back(Trip());
-        TripInf[TripInf.size()-1].Origin=Origin;
-        TripInf[TripInf.size()-1].Destination=Destination;
-        TripInf[TripInf.size()-1].Date=Date;
-        TripInf[TripInf.size()-1].Id=Id;
-        TripInf[TripInf.size()-1].Vehicle=Vehicle;
-        TripInf[TripInf.size()-1].Time=Time;
-        WriteData("Trips");
+bool AddTrip(string Origin,string Destination,string Date,string Id,string Vehicle,string Time){
+        if(SearchDriverId(Id)){
+                TripInf.push_back(Trip());
+                TripInf[TripInf.size()-1].Origin=Origin;
+                TripInf[TripInf.size()-1].Destination=Destination;
+                TripInf[TripInf.size()-1].Date=Date;
+                TripInf[TripInf.size()-1].Id=Id;
+                TripInf[TripInf.size()-1].Vehicle=Vehicle;
+                TripInf[TripInf.size()-1].Time=Time;
+                WriteData("Trips");
+                return true;
+        }
+        else    return false;
 }
 void DeletTrip(string Origin,string Destination,string Date,string Id,string Vehicle,string Time){
         int i=0;

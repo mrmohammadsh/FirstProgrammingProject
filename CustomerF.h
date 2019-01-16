@@ -1,5 +1,50 @@
 #ifndef CustomerF
 #define CustomerF
+    lint UHour,UMin;
+    bool IsCorrent(string id,string password){
+        for(long long int i=0;i<CountryAccount.size();i++){
+            if(CountryAccount[i].ID==stol(id)&&CountryAccount[i].Password==stol(password)){
+                return true;
+            }
+        }
+        return false;
+    }
+    void Time(string Time){
+        int temp;
+        for(lint i=0;i<Time.length();i++){
+            if(Time[i]==':'){
+                temp=i;
+                break;
+            }
+        }
+        string Help;
+        for(int i=0;i<temp;i++){
+            Help+=Time[i];
+        }
+        UHour=stol(Help);
+        Help="";
+        for(int i=temp+1;i<Time.length();i++){
+            Help+=Time[i];
+        }
+        UMin=stol(Help);
+
+    }
+    bool SeatExist(string Seat,string Origin,string Destination,string Date,string Vehicle,string Driver,string Time){
+        for(int i=0;i<CustomerTicket.size();i++){
+            if(
+                        CustomerTicket[i].Date==Date&&
+                        CustomerTicket[i].Time==Time&&
+                        CustomerTicket[i].Driver==Driver&&
+                        CustomerTicket[i].Origin==Origin&&
+                        CustomerTicket[i].Vehicle==Vehicle&&
+                        CustomerTicket[i].Destination==Destination&&
+                        CustomerTicket[i].Seat==Seat
+            ){
+                return false;
+            }
+        }
+        return true;
+    }
     long long int CustomerId(string BId){
         for(long long int i=0;i<CustomerList.size();i++){
             if(CustomerList[i].BId==BId){
@@ -81,7 +126,7 @@
         }
         return cap;
     }
-    void BuyTicket(int number,string Bpassword,string BId,string username,string Origin,string Destination,string Date,string Vehicle){
+    void BuyTicket(int number,string Bpassword,string BId,string username,string Origin,string Destination,string Date,string Vehicle,string Seat){
         int counter=1;
         for(int i=0;i<TripInf.size();i++){
             
@@ -94,6 +139,7 @@
             if(counter==number){
                 cout<<CustomerMony(BId);
                 if(TripCap(Origin,Destination,Date,Vehicle,TripInf[i].Time)<CAPACITY){
+                    if(SeatExist(Seat,Origin,Destination,Date,Vehicle,DriverInf[DriverId(TripInf[i].Id)].Firstname,TripInf[i].Time)){
                     if(CustomerMony(BId)>=TripCost(Origin,Destination)){
                         cout<<CountryAccount[0].Mony<<endl;
                         CountryAccount[0].Mony+=(long long int)((double)TripCost(Origin,Destination)*(COST)/100.0);
@@ -109,6 +155,7 @@
                         CustomerTicket[CustomerTicket.size()-1].Id=BId;
                         CustomerTicket[CustomerTicket.size()-1].Vehicle=Vehicle;
                         CustomerTicket[CustomerTicket.size()-1].Destination=Destination;
+                        CustomerTicket[CustomerTicket.size()-1].Seat=Seat;
                         CustomerATicket[CustomerATicket.size()-1].Date=CustomerTicket[CustomerTicket.size()-1].Date;
                         CustomerATicket[CustomerATicket.size()-1].Destination=CustomerTicket[CustomerTicket.size()-1].Destination;
                         CustomerATicket[CustomerATicket.size()-1].Driver=CustomerTicket[CustomerTicket.size()-1].Driver;
@@ -116,6 +163,7 @@
                         CustomerATicket[CustomerATicket.size()-1].Id=CustomerTicket[CustomerTicket.size()-1].Id;
                         CustomerATicket[CustomerATicket.size()-1].Vehicle=CustomerTicket[CustomerTicket.size()-1].Vehicle;
                         CustomerATicket[CustomerATicket.size()-1].Time=CustomerTicket[CustomerTicket.size()-1].Time;
+                        
                         cout<<"kkkkkkkkkkkkk"<<CustomerATicket.size()<<endl;
                         WriteData("Tickets");
                         WriteData("Accounts");
@@ -127,7 +175,7 @@
                     else{
                         cout<<"You Dont have enough mony";
                     }
-                    
+                    }
                 }
                 else{
                     cout<<"capacity full";

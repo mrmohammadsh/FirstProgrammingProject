@@ -16,7 +16,7 @@ using namespace std;
         string username,Password,Firstname,Lastname,Mobile,Friend,BId,Bpassword;
     };
     struct Ticket{
-        string Vehicle,Origin,Destination,Date,Driver,Id,Time;
+        string Vehicle,Origin,Destination,Date,Driver,Id,Time,Seat;
     };
     struct ATicket{
         string Vehicle,Origin,Destination,Date,Driver,Id,Time;

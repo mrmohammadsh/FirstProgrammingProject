@@ -189,6 +189,8 @@ void InsertData(){
         CustomerTicket[CustomerTicket.size()-1].Id=tmp;
         Tickets>>tmp;
         CustomerTicket[CustomerTicket.size()-1].Time=tmp;
+        Tickets>>tmp;
+        CustomerTicket[CustomerTicket.size()-1].Seat=tmp;
 
     }
 while(ATickets>>tmp){
@@ -305,6 +307,8 @@ void WriteData(string name){
             Tickets<<CustomerTicket[i].Id;
             Tickets<<'\t';
             Tickets<<CustomerTicket[i].Time;
+            Tickets<<'\t';
+            Tickets<<CustomerTicket[i].Seat;
             Tickets<<'\n';
             
         }
@@ -358,6 +362,7 @@ void WriteData(string name){
     }
     
 }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
