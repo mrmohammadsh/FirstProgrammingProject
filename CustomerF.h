@@ -1,6 +1,16 @@
 #ifndef CustomerF
 #define CustomerF
-    lint UHour,UMin;
+lint UHour,UMin;
+lint SHour,SMin;
+    string RandomCodeGenerator(){
+        string to10="123456789";
+        char tmp[16]="";
+        for(int i=0;i<15;i++){
+            tmp[i]=to10[rand()%9];
+        }
+        tmp[16]='\0';
+        return tmp;
+    }
     bool IsCorrent(string id,string password){
         for(long long int i=0;i<CountryAccount.size();i++){
             if(CountryAccount[i].ID==stol(id)&&CountryAccount[i].Password==stol(password)){
@@ -9,7 +19,7 @@
         }
         return false;
     }
-    void Time(string Time){
+    void TimeF(string Time){
         int temp;
         for(lint i=0;i<Time.length();i++){
             if(Time[i]==':'){
@@ -53,6 +63,11 @@
         }
         return -1;
     }
+        long long int TripCost(string Origin,string Destination){
+        long long int temp;
+        temp=pow(abs(CountryCitys[stoi(Origin)-1].X-CountryCitys[stoi(Destination)-1].X),2)+pow(abs(CountryCitys[stoi(Origin)-1].Y-CountryCitys[stoi(Destination)-1].Y),2);
+        temp=int(sqrt(temp));
+    }
     void CustomerReg(string username,string Password,string Firstname,string Lastname,string Mobile,string BId,string Bpassword,string Friend){
         //cout<<endl<<CustomerList.size()<<"kwejrklwj";
         //string username,Password,Firstname,Lastname,Mobile,Friend,BId,Bpassword;
@@ -77,7 +92,20 @@
             TripInf[i].Date==Date&&
             TripInf[i].Vehicle==Vehicle
             ){          //If
-                cout<<counter++<<'\t'<<TripInf[i].Time<<endl;
+                cout<<counter++<<'\t'<<"Departure Time:"<<TripInf[i].Time<<'\t';
+                if(Vehicle=="hava"){
+                    cout<<"Trip Time:"<< TripCost(Origin,Destination)/ASpeed*60<<'\t';
+                    cout<<"Trip Prize:"<< TripCost(Origin,Destination)*AMony<<endl;
+                }
+                else if(Vehicle=="car"){
+                    cout<<"Trip Time:"<< TripCost(Origin,Destination)/CSpeed*60<<'\t';
+                    cout<<"Trip Prize:"<< TripCost(Origin,Destination)*CMony<<endl;
+                }
+                else if(Vehicle=="train"){
+                    cout<<"Trip Time:"<< TripCost(Origin,Destination)/TSpeed*60<<'\t';
+                    cout<<"Trip Prize:"<< TripCost(Origin,Destination)*TMony<<endl;
+                }
+
                 
             }
 
@@ -88,11 +116,7 @@
         }
         return 1;
     }
-    long long int TripCost(string Origin,string Destination){
-        long long int temp;
-        temp=pow(abs(CountryCitys[stoi(Origin)-1].X-CountryCitys[stoi(Destination)-1].X),2)+pow(abs(CountryCitys[stoi(Origin)-1].Y-CountryCitys[stoi(Destination)-1].Y),2);
-        temp=int(sqrt(temp));
-    }
+
     long long int CustomerMony(string BId){
         for(long long int i=0;i<CountryAccount.size();i++){
             if(CountryAccount[i].ID==stoll(BId)){
@@ -161,6 +185,8 @@
                         CustomerTicket[CustomerTicket.size()-1].Vehicle=Vehicle;
                         CustomerTicket[CustomerTicket.size()-1].Destination=Destination;
                         CustomerTicket[CustomerTicket.size()-1].Seat=Seat;
+                        string code=RandomCodeGenerator();
+                        CustomerTicket[CustomerTicket.size()-1].Code=code;
                         CustomerATicket[CustomerATicket.size()-1].Date=CustomerTicket[CustomerTicket.size()-1].Date;
                         CustomerATicket[CustomerATicket.size()-1].Destination=CustomerTicket[CustomerTicket.size()-1].Destination;
                         CustomerATicket[CustomerATicket.size()-1].Driver=CustomerTicket[CustomerTicket.size()-1].Driver;
@@ -193,8 +219,7 @@
 
     }
     }
-    void DeleteTicket(string Vehicle,string Origin,string Destination,string Date,string Time,string Id,string Seat){
-        
+        void DeleteTicket(string Vehicle,string Origin,string Destination,string Date,string Time,string Id,string Seat){
         for(int i=0;i<CustomerTicket.size();i++){
             if(
             CustomerTicket[i].Origin==Origin&&
@@ -207,7 +232,6 @@
             ){ 
                  
             int counter=0;
-            
             for(counter=0;counter<TripInf.size();counter++){
             
                 if(
@@ -216,33 +240,59 @@
                 TripInf[counter].Date==Date&&
                 TripInf[counter].Vehicle==Vehicle
                 ){break;}}
+                if(((-1)*(SHour*60+SMin)-(UHour*60+UMin))>60){
+                    long long int mony=(long long int)((double)TripCost(Origin,Destination)*(100-PENALTY1)/100.0);
+                    CountryAccount[AccountId(Id)].Mony+=mony;
+                    CountryAccount[0].Mony-=(long long int)((double)mony*(COST)/100.0);;
+                    CountryAccount[DriverId(TripInf[counter].Id)].Mony+=(long long int)((double)TripCost(Origin,Destination)*(100-COST)/100.0);
+                    CustomerTicket.erase(CustomerTicket.begin()+i);
+                    //cout<<CustomerTicket.size()<<endl;
+                    WriteData("Tickets");
+                    WriteData("Accounts");
+                    WriteData("Drivers");
+                    return;
+                }
+                else{
+                    long long int mony=(long long int)((double)TripCost(Origin,Destination)*(100-PENALTY2)/100.0);
+                    CountryAccount[AccountId(Id)].Mony+=mony;
+                    CountryAccount[0].Mony-=(long long int)((double)mony*(COST)/100.0);;
+                    CountryAccount[DriverId(TripInf[counter].Id)].Mony+=(long long int)((double)TripCost(Origin,Destination)*(100-COST)/100.0);
+                    CustomerTicket.erase(CustomerTicket.begin()+i);
+                    //cout<<CustomerTicket.size()<<endl;
+                    WriteData("Tickets");
+                    WriteData("Accounts");
+                    WriteData("Drivers");
+                    return;
+                }
                 
-                long long int mony=(long long int)((double)TripCost(Origin,Destination)*(100-PENALTY)/100.0);
-                CountryAccount[AccountId(Id)].Mony+=mony;
-                CountryAccount[0].Mony-=(long long int)((double)mony*(COST)/100.0);;
-                CountryAccount[DriverId(TripInf[counter].Id)].Mony+=(long long int)((double)TripCost(Origin,Destination)*(100-COST)/100.0);
-                CustomerTicket.erase(CustomerTicket.begin()+i);
-                //cout<<CustomerTicket.size()<<endl;
-                WriteData("Tickets");
-                WriteData("Accounts");
-                WriteData("Drivers");
-                cout<<"Done"; 
-                return;
-            
         }
-        
-        
     }
-    cout<<"Can't Do This";
+}
+    void SysTime(){
+        time_t rawtime;
+        struct tm * timeinfo;
+        time( &rawtime );
+        timeinfo = localtime( &rawtime );
+        int index=((string)asctime(timeinfo)).find(':');
+        char khar[3];
+        khar[0]=asctime(timeinfo)[index-2];
+        khar[1]=asctime(timeinfo)[index-1];
+        khar[2]='\0';
+        SHour=stoi((string)khar);
+        khar[0]=asctime(timeinfo)[index+1];
+        khar[1]=asctime(timeinfo)[index+2];
+        khar[2]='\0';
+        SMin=stoi((string)khar);
     }
     void Update(string Time,string Date){
+        TimeF(Time);
         for(int i=0;i<TripInf.size();i++){
             
             if(
             
 
             TripInf[i].Date==Date&&
-            stoi(TripInf[i].Time)<=stoi(Time)
+            UHour<=SHour&&UMin<=SMin
             ){          //If
             TripInf.erase(TripInf.begin()+i);
             i--;
@@ -251,7 +301,7 @@
         for(int i=0;i<CustomerTicket.size();i++){
             if(
             CustomerTicket[i].Date==Date&&
-            stoi(CustomerTicket[i].Time)<=stoi(Time)
+            (SHour*60+SMin)-(UHour*60+UMin)>=0
             ){ 
                 CustomerATicket.push_back(ATicket());
                 CustomerATicket[CustomerATicket.size()-1].Vehicle=CustomerTicket[i].Vehicle;
@@ -269,24 +319,28 @@
                 CustomerATicket[CustomerATicket.size()-1].Time=CustomerTicket[i].Time;
                 CustomerTicket.erase(CustomerTicket.begin()+i);
                 i--;
+                WriteData("Tickets");
+                WriteData("ATickets");
             }
-    }
+        }
+
     }
     void CustomerHistory(string Id){
         for(int i=0;i<CustomerATicket.size();i++){
             if(CustomerATicket[i].Id==Id){
+                cout<<"Vehicle:";
                 cout<<CustomerATicket[i].Vehicle<<'\t';
-        
+                cout<<"Origin:";
                 cout<<CustomerATicket[i].Origin<<'\t';
-                
+                cout<<"Destination:";
                 cout<<CustomerATicket[i].Destination<<'\t';
-                
+                cout<<"Date:";
                 cout<<CustomerATicket[i].Date<<'\t';
-                
+                cout<<"Driver:";
                 cout<<CustomerATicket[i].Driver<<'\t';
-                
+                cout<<"ID:";
                 cout<<CustomerATicket[i].Id<<'\t';
-                
+                cout<<"Time:";
                 cout<<CustomerATicket[i].Time<<endl;
             }
         }
@@ -319,7 +373,7 @@
         return counter;
     }
     long long int  TripIndex(int number,string Origin,string Destination,string Date,string Vehicle){
-        int counter=1;
+        int counter=0;
         for(int i=0;i<TripInf.size();i++){
             
             if(

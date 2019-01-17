@@ -8,6 +8,24 @@ using namespace std;
 //-----------------------------------------GlobalVariables&Classes---------------------------------------
 //-----------------------------------------Function----------------------------------------------
 fstream Cities,Accounts,Customers,Tickets,Drivers,Trips,ATickets; 
+string Coding(string pass){
+    string Salt="ThisIsSalt";
+    pass=pass+Salt;
+    for(int i=0;i<pass.length();i++){
+        pass[i]=(char)((int)pass[i]-1);
+    }
+    return pass;
+}
+string DeCoding(string pass){
+
+    for(int i=0;i<pass.length();i++){
+        pass[i]=(char)((int)pass[i]+1);
+    }
+    string Salt="ThisIsSalt";
+    pass.erase(pass.find(Salt),pass.length());
+    //pass=pass-Salt;
+    return pass;
+}
 void OpenFile(const char *name){
     
         if(strcmp("Cities",name)==0){
@@ -49,7 +67,7 @@ void OpenFile(const char *name){
         else if(strcmp("ATickets",name)==0){
             cout<<"Aticket ...."<<endl;
             ATickets.open("ATicket.txt",ios::in|ios::out);
-            if(ATickets.is_open())    cout<<"Rading Trips Was Sucsseful"<<endl;
+            if(ATickets.is_open())    cout<<"Rading ATicket Was Sucsseful"<<endl;
             else exit(0);
         }
         else if("All"){
@@ -103,7 +121,7 @@ void EmptyFile(string name){
 void InsertData(){
     long long int temp,index;
     string tmp;
-    
+    //cout<<"helloooooooooooooooooooooooooooooooooooooo";
     while(Cities>>index){
         CountryCitys.push_back(City());
         Cities>>temp;
@@ -115,12 +133,13 @@ void InsertData(){
     while(Accounts>>index){
         CountryAccount.push_back(Account());
         CountryAccount[CountryAccount.size()-1].ID=index;
-        Accounts>>temp;
-        CountryAccount[CountryAccount.size()-1].Password=temp;
+        Accounts>>tmp;
+        CountryAccount[CountryAccount.size()-1].Password=stoll(DeCoding(tmp));
         Accounts>>temp;
         CountryAccount[CountryAccount.size()-1].Mony=temp;
          
     }
+    
     while(Customers>>tmp){
         CustomerList.push_back(Customer());
         CustomerList[CustomerList.size()-1].BId=tmp;
@@ -191,6 +210,8 @@ void InsertData(){
         CustomerTicket[CustomerTicket.size()-1].Time=tmp;
         Tickets>>tmp;
         CustomerTicket[CustomerTicket.size()-1].Seat=tmp;
+        Tickets>>tmp;
+        CustomerTicket[CustomerTicket.size()-1].Code=tmp;
 
     }
 while(ATickets>>tmp){
@@ -311,6 +332,8 @@ void WriteData(string name){
             Tickets<<CustomerTicket[i].Time;
             Tickets<<'\t';
             Tickets<<CustomerTicket[i].Seat;
+            Tickets<<'\t';
+            Tickets<<CustomerTicket[i].Code;
             Tickets<<'\n';
             
         }
@@ -353,18 +376,37 @@ void WriteData(string name){
         for(lint i=0;i<CountryAccount.size();i++){
             Accounts<<CountryAccount[i].ID;
             Accounts<<'\t';
-            Accounts<<CountryAccount[i].Password;
+            Accounts<<Coding(to_string(CountryAccount[i].Password));
             Accounts<<'\t';
             Accounts<<CountryAccount[i].Mony;
             Accounts<<'\n';
             
         }
         CloseFiles();
+        
 
     }
     
 }
+void CodingAccounts(){
+long long int temp,index;
+string tmp;
+OpenFile("Accounts");
+while(Accounts>>index){
 
+        CountryAccount.push_back(Account());
+        CountryAccount[CountryAccount.size()-1].ID=index;
+        Accounts>>temp;
+        CountryAccount[CountryAccount.size()-1].Password=temp;
+        Accounts>>temp;
+        CountryAccount[CountryAccount.size()-1].Mony=temp;
+
+         
+    }
+    CloseFiles();
+    WriteData("Accounts");
+
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

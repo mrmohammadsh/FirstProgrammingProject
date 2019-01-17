@@ -16,7 +16,7 @@ using namespace std;
         string username,Password,Firstname,Lastname,Mobile,Friend,BId,Bpassword;
     };
     struct Ticket{
-        string Vehicle,Origin,Destination,Date,Driver,Id,Time,Seat;
+        string Vehicle,Origin,Destination,Date,Driver,Id,Time,Code,Seat;
     };
     struct ATicket{
         string Vehicle,Origin,Destination,Date,Driver,Id,Time;
@@ -35,6 +35,6 @@ using namespace std;
     vector<struct Ticket> CustomerTicket;
     vector<struct ATicket> CustomerATicket;
     vector<struct Driver> DriverInf;
-     vector<struct Trip> TripInf;
-
+    vector<struct Trip> TripInf;
+//if(-(SHour*60+SMin)-(UHour*60+UMin))>60){
 #endif
