@@ -214,7 +214,9 @@ while(ATickets>>tmp){
 }
 void WriteData(string name){
     if(name=="Customer"){
+        EmptyFile("Customers");
         OpenFile("Customers");
+        
         //string Vehicle,Origin,Destination,Date,Driver;
         for(lint i=0;i<CustomerList.size();i++){
                 Customers<<CustomerList[i].BId;

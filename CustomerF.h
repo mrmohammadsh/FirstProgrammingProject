@@ -67,7 +67,7 @@
         CustomerList[CustomerList.size()-1].Bpassword=Bpassword;
         WriteData("Customer");
     }
-    void ShowTrip(string Origin,string Destination,string Date,string Vehicle){
+    bool ShowTrip(string Origin,string Destination,string Date,string Vehicle){
         int counter=1;
         for(int i=0;i<TripInf.size();i++){
             
@@ -82,6 +82,11 @@
             }
 
         }
+        if(counter==0){
+            cout<<"There No Trip";
+            return 0;
+        }
+        return 1;
     }
     long long int TripCost(string Origin,string Destination){
         long long int temp;
@@ -188,7 +193,8 @@
 
     }
     }
-    void DeleteTicket(string Vehicle,string Origin,string Destination,string Date,string Time,string Id){
+    void DeleteTicket(string Vehicle,string Origin,string Destination,string Date,string Time,string Id,string Seat){
+        
         for(int i=0;i<CustomerTicket.size();i++){
             if(
             CustomerTicket[i].Origin==Origin&&
@@ -196,10 +202,12 @@
             CustomerTicket[i].Date==Date&&
             CustomerTicket[i].Vehicle==Vehicle&&
             CustomerTicket[i].Id==Id&&
-            CustomerTicket[i].Time==Time
+            CustomerTicket[i].Time==Time&&
+            CustomerTicket[i].Seat==Seat
             ){ 
                  
             int counter=0;
+            
             for(counter=0;counter<TripInf.size();counter++){
             
                 if(
@@ -208,7 +216,7 @@
                 TripInf[counter].Date==Date&&
                 TripInf[counter].Vehicle==Vehicle
                 ){break;}}
-                cout<<"gooooooooz"; 
+                
                 long long int mony=(long long int)((double)TripCost(Origin,Destination)*(100-PENALTY)/100.0);
                 CountryAccount[AccountId(Id)].Mony+=mony;
                 CountryAccount[0].Mony-=(long long int)((double)mony*(COST)/100.0);;
@@ -218,10 +226,14 @@
                 WriteData("Tickets");
                 WriteData("Accounts");
                 WriteData("Drivers");
+                cout<<"Done"; 
                 return;
             
         }
+        
+        
     }
+    cout<<"Can't Do This";
     }
     void Update(string Time,string Date){
         for(int i=0;i<TripInf.size();i++){
@@ -278,5 +290,58 @@
                 cout<<CustomerATicket[i].Time<<endl;
             }
         }
+    }
+    long long int IsCustomerExist(string username,string Password){
+        for(long long int i=0;i<CustomerList.size();i++){
+                if(CustomerList[i].username==username&&CustomerList[i].Password==Password){
+                        return i+1;
+                }
+        }
+        return 0;
+
+    }
+    bool ShowSeat(string Origin,string Destination,string Date,string Vehicle,string Driver,string Time){
+        int counter=0;
+        for(int i=0;i<CustomerTicket.size();i++){
+            
+            if(
+                        CustomerTicket[i].Date==Date&&
+                        CustomerTicket[i].Time==Time&&
+                        CustomerTicket[i].Driver==Driver&&
+                        CustomerTicket[i].Origin==Origin&&
+                        CustomerTicket[i].Vehicle==Vehicle&&
+                        CustomerTicket[i].Destination==Destination
+            ){
+                counter++;
+                cout<<counter<<"-"<<CustomerTicket[i].Seat<<endl;
+            }
+        }
+        return counter;
+    }
+    long long int  TripIndex(int number,string Origin,string Destination,string Date,string Vehicle){
+        int counter=1;
+        for(int i=0;i<TripInf.size();i++){
+            
+            if(
+            TripInf[i].Origin==Origin&&
+            TripInf[i].Destination==Destination&&
+            TripInf[i].Date==Date&&
+            TripInf[i].Vehicle==Vehicle
+            ){       
+                counter++; //If
+            if(counter==number){
+                return i;
+
+            }
+        }
+        }
+    }
+    int UserNameToIndex(string username){
+        for(int i=0;i<CustomerList.size();i++){
+            if(CustomerList[i].username==username){
+                return i;
+            }
+        }
+
     }
 #endif

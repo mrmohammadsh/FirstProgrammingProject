@@ -32,11 +32,8 @@
                 cout<<"Friend:";
                 cout<<CustomerList[i].Friend<<'\t';
                 cout<<"Bank Id:";
-                cout<<CustomerList[i].BId<<'\t';
-                cout<<"Time:";
-                cout<<CustomerList[i].Time<<endl;
-                string username,Password,Firstname,Lastname,Mobile,Friend,BId,Bpassword;
-        }
+                cout<<CustomerList[i].BId<<endl;
+                }
 
     }
 

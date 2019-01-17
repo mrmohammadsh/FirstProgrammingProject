@@ -93,4 +93,40 @@ void TripCustomer(string Origin,string Destination,string Date,string Vehicle,st
             }
         }
 }
+bool AChangeAcInfo(string username,string Firstname,string Lastname,string Mobile,string Vehicle){
+        for(long long int i=0;i<DriverInf.size();i++){
+                if(DriverInf[i].username==username){
+                        DriverInf[i].Firstname=Firstname;
+                        DriverInf[i].Lastname=Lastname;
+                        DriverInf[i].Mobile=Mobile;
+                        DriverInf[i].Vehicle=Vehicle;
+                        WriteData("Drivers");
+                        return 1;
+                }
+        }
+        return 0;
+}
+bool AChangeTripInfo(string Date,string Time,long long int index){
+        TripInf[index].Date=Date;
+        TripInf[index].Time=Time;
+        WriteData("Trips");
+        return 1;
+
+}
+long long int IsDriverExist(string username){
+        for(long long int i=0;i<DriverInf.size();i++){
+                if(DriverInf[i].username==username){
+                        return i+1;
+                }
+        }
+        return 0;
+}
+long long int IsTripExist(string Destination,string Origin,string Id){
+        for(long long int i=0;i<TripInf.size();i++){
+                if(TripInf[i].Id==Id&&TripInf[i].Destination==Destination&&TripInf[i].Origin==Origin){
+                        return i+1;
+                }
+        }
+        return 0;
+}
 #endif
