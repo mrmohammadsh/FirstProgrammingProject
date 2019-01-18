@@ -11,6 +11,7 @@
 //#include <unistd.h>
 #include <string>
 #include <stdio.h>
+#include <Windows.h>
 #define CAPACITY 10
 #define PENALTY 10
 #define COST 10
@@ -31,20 +32,38 @@ typedef long long int lint;
 typedef unsigned long long int ulint;
 //------------------------------------------NameSpace--------------------------------------------
 using namespace std;
-
+HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 //-----------------------------------------GlobalVariables&Classes---------------------------------------
 const string Car =
 "          ___________\n  -  ----// --|||-- \\\\ \n ---- __//____|||____\\____  \n      | _|      |    --_  ||\n  ----|/ \\______|______/ \\_|| Mr.Fulsh\n ______\\_/_____________\\_/_______\n                                   LOADING";
 
 string ADMINPASS = "11";
 void ProgramMenu() {
+
 	OpenFile("All");
 	InsertData();
 	CloseFiles();
 	Update("12:59", "1397/1/1");
 	bool MainFlag = true;
 	while (MainFlag) {
-		cout << "1-Admin\n2-User\n3-Guest\n4-Register New User\n5-Driver\n";
+		Sleep(100);
+		system("cls");
+		for (int i = 0; i < 35; i++) cout << ' ';
+		for (int i = 0; i < 40; i++) cout << '-';
+		cout << endl;
+		for (int i = 0; i < 35; i++) cout << ' ';
+		cout << "-**************MAIN MENU***************-" << endl;
+		for (int i = 0; i < 35; i++) cout << ' ';
+		for (int i = 0; i < 40; i++) cout << '-';
+		cout << endl;
+		for (int i = 0; i < 35; i++) cout << ' ';
+		cout << "1.log in" << endl;
+		for (int i = 0; i < 35; i++) cout << ' ';
+		cout << "2.sign in as guest" << endl;
+		for (int i = 0; i < 35; i++) cout << ' ';
+		cout << "3.sign in" << endl;
+		for (int i = 0; i < 35; i++) cout << ' ';
+		cout << "4.drivers" << endl;
 		int temp;
 		cin >> temp;
 		switch (temp) {
@@ -578,7 +597,13 @@ int main() {
 	//WriteData("Tickets");
 	//cout<<to_string(13565554);
 	cout << "salam" << endl;
+
+	HWND console = GetConsoleWindow();
+	RECT r;
+	GetWindowRect(console, &r);
+	MoveWindow(console, r.left, r.top, 800, 600, TRUE);
 	ChapeMshin();
+
 	//cout<<AddTrip("1","3","1397/1/1","200014","hava","12");
 	//DriverReg("sahand","1234","sahand","zoufan","09351618663","200014","7535","hava");
 	//AddTrip("salam","salam","salam","salam","salam","salam");

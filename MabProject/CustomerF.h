@@ -442,4 +442,117 @@ int UserNameToIndex(string username) {
 	}
 
 }
+void chair_selection(vector<int> v, int capacity,int shekl)
+{
+	SetConsoleTextAttribute(console, 6);
+
+	if (shekl == 1)
+	{
+		cout << ".-------------------------------------------------------------." << endl;
+		cout << "'------..-------------..----------..----------..----------..--.|" << endl;
+		cout << "|       \\\\            ||          ||          ||          ||  ||" << endl;
+		cout << "|        \\\\           ||          ||          ||          ||  ||" << endl;
+		cout << "|    ..   ||  _    _  ||    _   _ || _    _   ||    _    _||  ||" << endl;
+		cout << "|    ||   || //   //  ||   //  // ||//   //   ||   //   //|| /||" << endl;
+		cout << "|_.------\"\'\'----------\'\'----------\'\'----------\'\'----------\'\'--\'|" << endl;
+		cout << ".______________________________________________________________|" << endl;
+		cout << "|)|      |       |       |       |    |         |      ||==|  |" << endl;
+		cout << "| |      |  _-_  |       |       |    |  .-.    |      ||==| C|" << endl;
+		cout << "| |  __  |.\'.-.\' |   _   |   _   |    |.\'.-.\'.  |  __  | \"__== \'" << endl;
+		cout << "\'---------\'|( )|\'----------------------\'|( )|\'----------\"\"" << endl;
+		cout << "            \'-\'                          \'-\'" << endl << endl << endl;
+
+
+	}
+	else if (shekl == 2)
+	{
+		cout << "                                        *************************************" << endl;
+		cout << "                                      ***************************************" << endl;
+		cout << "                                    *****************************************" << endl;
+		cout << "                                  *******************************************" << endl;
+		cout << "                               **********************************************" << endl;
+		cout << "                           **************************************************" << endl;
+		cout << "                        *************************************************" << endl;
+		cout << "                     *****************************************" << endl;
+		cout << "                   ************            ***********" << endl;
+		cout << "                 *******                 *******" << endl;
+		cout << "                *****                   *****" << endl;
+		cout << "    ....________**___......     ......___**________....     _________________" << endl;
+		cout << "  __IooI==   = = =   ~~~~~I     I~~~~~   = = =   ==IooI__   I         I   I" << endl;
+		cout << "I_I_I__I______GBW____=====I_I_I_I=====____GBW______I__I_I_I I GBW     I   I" << endl;
+		cout << "`-\'O==O~=============~O==O`-\'~`-\'O==O~=============~O==O`-\'~~o==o~~~~~~~~~~~~" << endl << endl << endl;
+	}
+	else if (shekl == 3)
+	{
+		cout << "                              |" << endl;
+		cout << "                        --====|====--" << endl;
+		cout << "                              |" << endl;
+		cout << "                          .-\"\"\"\"\" -." << endl;
+		cout << "                        .\'_________ \'." << endl;
+		cout << "                       /_/_|__|__|_\\_\\" << endl;
+		cout << "                      ;\'-._       _.-\';" << endl;
+		cout << " ,--------------------|    `-. .-'    |--------------------," << endl;
+		cout << "  ``\"\"--..__    ___   ;       \'       ;   ___    __..--\"\"``" << endl;
+		cout << "            `\"-" << "/" << "/ \\\\.._\\             /_..// \\\\-\"`" << endl;
+		cout << "               \\\\_//    \'._       _.\'    \\\\_//" << endl;
+		cout << "                `\"`        ``---``        `\"`" << endl;
+	}
+	for (int i = 1; i <= capacity; i++)
+	{
+		if (i < 10) {
+			if (i % 3 == 0)
+			{
+				for (int j = 0; j < v.size(); j++) {
+					if (v[j] == i) SetConsoleTextAttribute(console, 4);
+					else SetConsoleTextAttribute(console, 2);
+				}
+				cout << "\t  |  " << i << " |" << endl;
+			}
+			if (i % 3 == 1)
+			{
+				for (int j = 0; j < v.size(); j++) {
+					if (v[j] == i) SetConsoleTextAttribute(console, 4);
+					else SetConsoleTextAttribute(console, 2);
+				}
+				cout << "|  " << i << " | ";
+			}
+			if (i % 3 == 2)
+			{
+				for (int j = 0; j < v.size(); j++) {
+					if (v[j] == i) SetConsoleTextAttribute(console, 4);
+					else SetConsoleTextAttribute(console, 2);
+				}
+				cout << "|  " << i << " |";
+			}
+		}
+		else {
+			if (i % 3 == 0)
+			{
+				for (int j = 0; j < v.size(); j++) {
+					if (v[j] == i) SetConsoleTextAttribute(console, 4);
+					else SetConsoleTextAttribute(console, 2);
+				}
+				cout << "\t  | " << i << " |" << endl;
+			}
+			if (i % 3 == 1)
+			{
+				for (int j = 0; j < v.size(); j++) {
+					if (v[j] == i) SetConsoleTextAttribute(console, 4);
+					else SetConsoleTextAttribute(console, 2);
+				}
+				cout << "| " << i << " | ";
+			}
+			if (i % 3 == 2)
+			{
+				for (int j = 0; j < v.size(); j++) {
+					if (v[j] == i) SetConsoleTextAttribute(console, 4);
+					else SetConsoleTextAttribute(console, 2);
+				}
+				cout << "| " << i << " |";
+			}
+		}
+
+	}
+	SetConsoleTextAttribute(console, 15);
+}
 #endif

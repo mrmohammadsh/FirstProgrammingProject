@@ -3,7 +3,6 @@
 #include <string>
 #include <stdlib.h>
 #include <iostream>
-#include <Windows.h>
 using namespace std;
 
 void ChapeMshin() {
@@ -25,15 +24,11 @@ void ChapeMshin() {
 			cout << car[k];
 		}
 
-		Sleep(30);
+		Sleep(10);
 	}
 	system("cls");
 
 
 }
-
-
-
-
 
 #endif
